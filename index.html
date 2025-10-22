@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Melena de león</title>
+  <meta name="description" content="Melena de león" />
+  <meta name="keywords" content="Melena de león" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --red:#0c8b08; --red-dark:#b91c1c; --gold:#ffb300; --black:#0b0b0b;
+      --surface:#111; --card:#151515; --muted:#b8c0cc;
+      --ok:#10b981; --warn:#f59e0b; --ring:#ffffff22;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0b0b0b,#121212 60%,#0b0b0b);color:#eaeaea;font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif;padding: 12px;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1180px;margin:16px auto;padding:0 20px}
+
+    /* Global effects */
+    .glass{background:linear-gradient(180deg,#ffffff0f,#ffffff05);backdrop-filter:blur(8px);border:1px solid #ffffff1a;box-shadow:0 10px 30px #0008;border-radius:16px}
+    .btn{display:inline-flex;gap:.6rem;align-items:center;justify-content:center;padding:14px 22px;border-radius:999px;background:var(--red);font-weight:700;letter-spacing:.2px;width: 100%;color: white;transition:.2s;		-webkit-animation: heartbeat 1.5s ease-in-out infinite both;animation: heartbeat 1.5s ease-in-out infinite both;}
+    .btn:hover{background:var(--red-dark);transform:translateY(-1px)}
+    .btn.outline{background:transparent;border:1px solid #ffffff33;animation: none;}
+    .accent{color:var(--gold)}
+    .muted{color:var(--muted);max-width: 900px;}
+    .shadow-xl{box-shadow:0 30px 80px #0009}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:6px 10px;border:1px solid #ffffff2a;border-radius:999px;background:#ffffff0f;font-size:.85rem}
+    .kpi{display:grid;gap:8px;padding:6px 12px;border-radius:14px;background:#0f0f0f;border:1px solid #ffffff14;flex: 1;align-content: center;}
+    .kpi strong{font-size:1.4rem}
+
+    /* Loading state for button */
+    .btn.loading{opacity:.85;pointer-events:none}
+    .btn .spinner{width:18px;height:18px;border-radius:999px;border:3px solid #ffffff55;border-top-color:#fff;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Hero */
+    header.hero{position:relative;overflow:hidden}
+    .hero .bg{position:absolute;inset:0;background:radial-gradient(80% 80% at 70% 10%,#e11d2a22,transparent 50%),radial-gradient(70% 60% at 10% 80%,#ffd76a22,transparent 50%)}
+    .hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:6px 0 40px;position: relative; z-index: 3;}
+    .title{font-size:clamp(1.5rem,2.5vw,3.4rem);line-height:1.1;font-weight:800;max-width: 80vw;}
+    .subtitle{font-size:1rem;color:#d8dde8;max-width: 73vw;}
+    .trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+
+    /* Product mock image card */
+    .product-card{position:relative;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#191919,#0e0e0e);border:1px solid #ffffff14}
+    .product-card .shine{position:absolute;inset:-40%;background:conic-gradient(from 0deg at 50% 50%,#f59e0b70, #f59e0b00 25%, #f59e0b1f 50%, #f59e0b08 75%);filter:blur(40px);animation:spin 14s linear infinite}
+    .product-media{position:relative;display: flex;justify-content: center;}
+    .product-media .bottle{width:60%}
+    .price{font-size:1.2rem}
+
+    /* Sections */
+    section{padding:70px 0}
+    .sec-title{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:0 0 12px;text-wrap: pretty;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .grid-2 p{max-width: 250px;font-weight: 700;text-wrap: pretty;font-size: 14px;}
+    .grid-2-1{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;text-wrap: pretty;}
+    .benefit{padding:18px;border-radius:14px;background:#0f0f0f;border:1px solid #ffffff12;transition:.2s;}
+    .benefit:hover{transform:translateY(-2px);border-color:#ffffff33}
+
+    /* Tabs */
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid #ffffff22;background:#0d0d0d;cursor:pointer;color: white;flex: 1;}
+    .tab.active{background:#1a1a1a;border-color:#ffffff44;color: gold;}
+    .tabpanes > div{display:none}
+    .tabpanes > div.active{display:grid}
+
+    /* Social proof */
+    .stars{color:#ffd76a}
+    .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .review{padding:18px;border-radius:16px;background:#0f0f0f;border:1px solid #ffffff12;position:relative}
+    .review:before{content:"\201C";position:absolute;left:14px;top:-18px;font-size:70px;color:#ffffff15}
+
+    /* Offer strip */
+    .offer{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .timer{display:flex;gap:10px;justify-content: center;}
+    .timer .box{padding:10px 12px;background:#0f0f0f;border:1px solid #ffffff18;border-radius:10px;text-align:center}
+
+    /* FAQ */
+    .faq{border:1px solid #ffffff18;border-radius:14px;overflow:hidden}
+    .faq details{border-bottom:1px solid #ffffff12;background:#0f0f0f}
+    .faq summary{cursor:pointer;padding:16px;font-weight:600}
+    .faq p{padding:0 16px 16px;margin:0;color:#d7dbe6}
+
+    /* Sticky bar */
+    .stickybar{position:sticky;bottom:0;background:#0b0b0bd9;border-top:1px solid #ffffff1a;backdrop-filter:blur(8px)}
+    .stickybar .row{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 0}
+
+    /* Scroll progress */
+    .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));width:0;z-index:999}
+
+    /* recientes */
+    .imagenderecha{position: absolute;bottom: 0px;right: 10px; width: 80%; max-width: 280px;}
+    #orderForm{padding:18px;display:grid;gap:14px;}
+    #orderForm div{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .preform{width: 100%;background-image: url(gifsex.gif);min-height: 350px;background-size: cover;border-radius: 16px;background-attachment: fixed;max-width: 1100px;background-position: center;display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end;}
+    .wrappercausas{display:grid;grid-template-columns:1.3fr 0.7fr;gap:18px;align-items:center}
+    .solomovil{display: none;}
+    #ingredientes{background-image: url(gime.gif);background-repeat: no-repeat; background-position: center; background-size: cover;background-attachment: fixed;}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      header{background-image: url(fondo1.webp);background-size: 280px;background-repeat: no-repeat;background-position: 220px 40px;}
+      .hero .grid{grid-template-columns:1fr;gap:22px;padding-top:0px; padding-bottom: 0px;}
+      .grid-3,.reviews{grid-template-columns:1fr}
+      .offer{grid-template-columns:1fr}
+      .imagenderecha{position: absolute;bottom: 0px;right: -110px; width: 80%; max-width: 280px;display: none;}
+      .trust{text-align: center;}
+      #orderForm div{display:grid;grid-template-columns:1fr;gap:12px}
+      .stickybar .row{flex-direction: column;}
+      .kpi{text-align: left;}
+      .preform{background-position: -330px; display: block;}
+      .subtitle{ background-color: #000000cc;padding: 12px;border-radius: 16px;text-wrap: pretty;}
+      nav{position: absolute; opacity: 0;}
+      .wrappercausas{grid-template-columns: 1fr;}
+      #pane-core,#pane-amino,#pane-vit{grid-template-columns: 1fr 1fr;min-height: 300px;}
+      .solomovil{display: block;}
+      .grid-2-1{grid-template-columns:1fr}
+      
+    }
+
+    /* Inputs */
+    .in{width:100%;margin-top:6px;padding:12px 14px;border:1px solid #ffffff22;background:#0f0f0f;border-radius:12px;color:#eaeaea;outline:none}
+    .in:focus{border-color:var(--gold);box-shadow:0 0 0 4px var(--ring)}
+    label{display:block;font-weight:600}
+    .error{border-color:#ef4444!important}
+    #totalsBox{grid-template-columns: 1fr 1fr !important;justify-items: center;}
+
+    /* ====== NUEVO: estilos del modal, selector de ofertas y totales (aislados, sin tocar lo existente) ====== */
+    .modal-overlay{position:fixed;inset:0;background:#000a;backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px}
+    .modal{width:min(960px,100%);max-height:92vh;overflow:auto;background:#0e0e0e;border:1px solid #ffffff22;border-radius:16px;box-shadow:0 30px 80px #000c}
+    .modal header{position:sticky;top:0;background:#0e0e0ef2;padding:16px 18px;border-bottom:1px solid #ffffff1a;display:flex;justify-content:space-between;align-items:center}
+    .modal h3{margin:0;font-size:1.4rem}
+    .modal .close{background:transparent;border:0;color:#fff;font-size:1.6rem;cursor:pointer;line-height:1}
+    .modal .body{padding:18px}
+    .modal .footer{padding:16px;border-top:1px solid #ffffff1a;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    .offers{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0 8px}
+    .offer-card{display:grid;grid-template-columns:92px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid #ffffff22;border-radius:14px;background:#101010;cursor:pointer;transition:.2s}
+    .offer-card:hover{border-color:#ffffff55;transform:translateY(-1px)}
+    .offer-card.active{outline:2px solid var(--red);box-shadow:0 0 0 4px #ffffff12 inset}
+    .offer-img{width:92px;height:92px;display:flex;align-items:center;justify-content:center;background:#0b0b0b;border-radius:10px;border:1px solid #ffffff14;overflow:hidden}
+    .offer-title{font-weight:700}
+    .offer-badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;padding:4px 8px;border-radius:999px;border:1px solid #ffffff22;margin-left:6px}
+    .badge-hot{background:#1e3a8a;color:#fff;border-color:transparent}
+    .badge-save{background:#0f5132;color:#c6f6d5;border-color:transparent}
+    .price{display:flex;flex-direction:column;align-items:flex-end}
+    .price .compare{color:#94a3b8;text-decoration:line-through;font-size:.9rem}
+    .price .current{font-size:1rem;font-weight:800}
+    .totals{display:grid;gap:6px;padding:12px;border:1px dashed #ffffff33;border-radius:12px;background:#0b0b0b;margin:8px 0 14px}
+    .row{display:flex;justify-content:space-between;gap:12px}
+    .row strong{font-weight:800}
+    @media (max-width:980px){
+      .offer-card{grid-template-columns:53px 1fr auto}
+      .offer-img{width:50px;height:50px}
+    }
+
+  @-webkit-keyframes heartbeat {
+    from {transform: scale(1);transform-origin:center;animation-timing-function:ease-out}
+    10% {transform: scale(0.91);animation-timing-function:ease-in}
+    17% {transform: scale(0.98);animation-timing-function:ease-out}
+    33% {transform: scale(0.87);animation-timing-function:ease-in}
+    45% {transform: scale(1);animation-timing-function:ease-out}
+  }
+  @keyframes heartbeat {
+    from {transform: scale(1);transform-origin:center;animation-timing-function:ease-out}
+    10% {transform: scale(0.91);animation-timing-function:ease-in}
+    17% {transform: scale(0.98);animation-timing-function:ease-out}
+    33% {transform: scale(0.87);animation-timing-function:ease-in}
+    45% {transform: scale(1);animation-timing-function:ease-out}
+  }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <header class="hero">
+    <div class="wrap grid grid-hero grid hero grid">
+      <div>
+        <div class="badge">Regenerador y Oxigenante Cerebral</div>
+        <h1 class="title"><span class="accent">Recupera tu enfoque y claridad mental </span><br> <span style="font-size: 20px;margin-top: 18px;">Melena de León <br> Naturalsplast</span></h1>
+        <p class="subtitle">Más energia y concentración desde <strong style="color: var(--gold);"> el primer mes.</strong></p>
+        <div class="trust">
+          <div class="kpi"><strong class="">Concentración</strong><span class="muted">No mas mente dispersa</span></div>
+          <div class="kpi"><strong class="">Memoria</strong><span class="muted">Recupera tu memoria</span></div>
+          <div class="kpi"><strong class="">Energia</strong><span class="muted">No mas agotamiento, vive pleno y feliz</span></div>
+        </div>
+        <div class="cta-row">
+          <a href="#oferta" class="btn shadow-xl">Quiero recuperar mi potencial</a>
+          <a href="#ingredientes" class="btn outline">Ver fórmula y evidencia</a>
+        </div>
+        <div class="trust" style="margin-top:14px">
+          <span class="accent">Formula natural y segura para hipertensión, diabetes y cardíacos. Sin efectos secundarios.</span>
+        </div>
+      </div>
+
+      <div class="product-card shadow-xl" style="position: relative;">
+        <div class="shine" aria-hidden></div>
+        <div style="text-align: center;">
+          <h2 class="solomovil" style="text-wrap: pretty;">🌿 El secreto natural para un cerebro activo y enfocado</h2>
+        </div>
+        <div class="product-media">
+          <img class="bottle" loading="lazy" src="melenadeleon.webp" alt="ZIPPER STRONG frasco 180 tabletas"/>
+        </div>
+        <div style="padding:16px;display:flex;align-items:center;justify-content:center">
+          <div style="text-align: center;">
+            <div class="solomovil" style="padding: 6px;margin: 6px;border-radius: 16px;"><strong>Toma 2 tabletas al día. <br>
+                En pocos días notarás mayor claridad mental, concentración y equilibrio emocional</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg"></div>
+  </header>
+     
+  <main>
+    <!-- Beneficios principales -->
+    <section id="beneficios" class="wrap">
+      <div class="grid-2-1" id="benefitsGrid">
+        <article class="benefit animate" style="background-image: url(imagenbanner.webp);color: #ffffff;background-position: center;background-blend-mode: soft-light;"><h3 class="accent">Mejora tu concentración y memoria</h3><p>Estimula las funciones cognitivas, ayudándote a pensar más rápido y mantener la mente clara todo el día.</p></article>
+        <article class="benefit animate" style="background-image: url(control.webp);color: #ffffff;background-position: top right;background-blend-mode: soft-light;"><h3 class="accent">Aumenta tu energía sin cafeína</h3><p> Las vitaminas B1, B2 y B6 aportan vitalidad y equilibrio al sistema nervioso, sin causar nerviosismo ni insomnio.</p></article>
+        <article class="benefit animate" style="background-image: url(resistencia.webp);color: #ffffff;background-position: center;background-blend-mode: soft-light;"><h3 class="accent">Reduce el estrés y mejora el ánimo</h3><p>Favorece la estabilidad emocional y la relajación mental de forma natural.</p></article>
+        <article class="benefit animate" style="background-image: url(volumen.webp);color: #ffffff;background-position: center;background-blend-mode: soft-light;"><h3 class="accent">Protege tu cerebro a largo plazo</h3><p>Apoya la regeneración neuronal y el bienestar cognitivo con una fórmula respaldada por la ciencia.</p></article>
+      </div>
+    </section>
+
+   
+
+    <!-- Comparativa/visual blocks -->
+    <section class="wrap">
+      <div class="grid-2-1">
+        <div class="glass" style="padding:18px">
+          <h3 class="accent" style="text-align: center;">Producto con registro INVIMA</h3>
+          <img loading="lazy" src="invima.webp" alt="invima" style="border-radius: 16px;"/>
+        </div>
+        <div class="glass" style="padding:18px">
+          <h3 class="accent">Elije Melena de León Naturalsplast y no las imitaciones</h3>
+          <ul>
+            <li>🚫 Evita riesgos: hay productos baratos de $60.000 que no cuentan con registro sanitario ni garantía sobre su contenido</li>
+            <li>⚠️ Cuidado con los suplementos sin respaldo: pueden afectar tu salud y no ofrecen resultados reales.</li>
+            <li>✅ Confía en la marca líder:
+            Melena de León Naturalsplast S.A.S. cuenta con registro INVIMA, fabricación certificada y fórmulas con ingredientes seguros y de calidad.</li>
+          </ul>
+          <h4>Cada tableta está elaborada bajo estrictos estándares de laboratorio, garantizando pureza y efectividad.</h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass" style="display: flex; flex-wrap: wrap; justify-content: center;align-items: center;padding:24px 12px;box-shadow: 0px 0px 9px gold;" >
+        
+            <div style="text-align: center; ">
+              <h2 style="text-align: center;">Melena de león</h2>
+              <div style="width: 100%;display: flex; flex-wrap: wrap; justify-content: center;margin-bottom: 6px;">
+                <img src="melenadeleon.webp" alt="" style="width: 180px;"/>
+              </div>
+              <div class="stars" style="margin-top: -20px;">
+                <div style="color: #FFD700; font-size: 24px; margin-top: 0px;">
+                  ★★★★★
+                </div>
+                <p style="font-weight: 500; color:#ffffff;margin-top:-5px;">
+                  Calificación 5/5 por más de 1.200 personas satisfechas
+                </p>
+                <p style="text-wrap: pretty;">🔒 ¡solo pagas cuando recibes tu producto! </p>
+              </div>
+              <div style="display:flex; flex-wrap: wrap; justify-content: space-around; align-items: center;border: solid 1px white;padding: 12px;border-radius: 16px;">
+                  <div style="width: 70%;text-align: left;">100 tabletas</div>
+                  <div class="price" style="width: 30%;">
+                      <span class="compare">$150.000</span>
+                      <span class="current">$89.900</span>
+                  </div>
+                  
+                  
+                  <a href="#checkout" class="btn">Ordenar ahora</a>
+                  <p>
+                    🚚 Envíos rápidos y seguros directamente desde el laboratorio.</p>
+              </div>
+           </div>
+    
+      </section>
+
+    <!-- Reseñas -->
+    <section id="resenas" class="wrap">
+      <h2 class="sec-title">Personas que confían en Melena de León Naturalsplast</h2>
+      <div class="reviews" id="reviews">
+        <article class="review animate"><div class="stars">★★★★★</div><p>“Después del primer mes, dejé las bebidas energizantes. Confianza total y energía todo el día.”</p><div class="muted">Carlos, Bogotá</div></article>
+        <article class="review animate"><div class="stars">★★★★★</div><p>“Desde que lo uso, mi concentración mejoró muchísimo en el trabajo. Me siento con más energía y menos estrés.”</p><div class="muted">Laura, Medellín</div></article>
+        <article class="review animate"><div class="stars">★★★★★</div><p>“Probé otros productos más baratos y no me sirvieron. Este sí tiene resultados y me da confianza porque tiene INVIMA”</p><div class="muted">Juan, Bucaramanga</div></article>
+      </div>
+    </section>
+
+
+
+     <!-- Ingredientes / Tabs -->
+    <section id="ingredientes" class="wrap">
+      <h2 class="sec-title" style="color: var(--gold); text-shadow: 1px 1px 1px white; text-align: center;">Fórmula activa 100% natural</h2>
+
+      <div class="tabs" role="tablist" aria-label="Pestañas de ingredientes">
+        <button class="tab active" data-pane="core">Núcleo activo</button>
+        <button class="tab" data-pane="amino">Aminoácidos & Energía</button>
+        <button class="tab" data-pane="vit">Vitaminas & Minerales</button>
+      </div>
+
+      <div class="tabpanes">
+        <div id="pane-core" class="active grid-3">
+          <div class="kpi"><span class="muted">Melena de León</span><strong>90 mg</strong><span class="muted">(Hericium erinaceus)</span></div>
+  
+          <div class="kpi"><span class="muted">Suero de Leche</span><strong>0.8 mg</strong><span class="muted">Vigor tradicional</span></div>
+
+  
+        </div>
+
+        <div id="pane-amino" class="grid-3">
+
+          <div class="kpi"><span class="muted">L-Carnitina</span><strong>30 mg</strong><span class="muted">Energía celular</span></div>
+          <div class="kpi"><span class="muted">Proteína de soya</span><strong>10 mg</strong><span class="muted">Aporte proteico</span></div>
+
+        </div>
+
+        <div id="pane-vit" class="grid-3">
+          
+          <div class="kpi"><span class="muted">Vit. B1</span><strong>0.3 mg</strong><span class="muted">Energía</span></div>
+          <div class="kpi"><span class="muted">Vit. B2</span><strong>0.3 mg</strong><span class="muted">Metabolismo</span></div>
+          <div class="kpi"><span class="muted">Vit. B6</span><strong>0.1 mg</strong><span class="muted">Sistema nervioso</span></div>
+          <div class="kpi"><span class="muted">Tocoferol</span><strong>15 UI</strong><span class="muted">Antioxidante</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;    margin-top: 16px;color: white;text-align: center;background-color: #0f0f0f;padding: 16px;border-radius: 16px;" class="muted">Modo de uso: 2 tabletas/día (después de desayuno y cena).</div>
+      <div class="cta-row" style="margin-top:18px;"><a href="#oferta" class="btn" style="margin-bottom: 18px;">Comenzar ahora</a></div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="wrap">
+      <h2 class="sec-title">Preguntas frecuentes</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Cuándo noto resultados?</summary>
+          <p>La mayoría percibe mejora en la primera semana. El ciclo de 3 meses busca una restauración sostenida.</p>
+        </details>
+        <details>
+          <summary>¿Tiene efectos secundarios?</summary>
+          <p>No se han reportado. Es 100% natural y apto para hipertensión, diabetes y cardíacos. Si tomas fármacos, consulta a tu médico.</p>
+        </details>
+        <details>
+          <summary>¿Cuanto demora en llegar?</summary>
+          <p>Recibes entre 3 a 5 días hábiles dependiendo de la ciudad en donde te encuentres.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Oferta con contador -->
+    <section id="oferta" class="wrap">
+      <div class="offer glass" style="padding:20px">
+        <div class="glass" style="padding:16px">
+          <div class="preform">
+            <h2 class="sec-title" style="color: rgb(255, 255, 255);padding: 16px;text-shadow: 1px 1px 1px #ffb300;">Pide ahora <br><span class="accent">Recibe Obsequio</span></h2>
+            <img src="promo.webp" alt="">
+          </div>
+          
+        </div>
+
+        <div>
+          <h2 class="sec-title">Oferta limitada – <span class="accent">Melena de león</span> 100 tabletas</h2>
+          <ul style="line-height:1.9;margin:0;padding-left:18px">
+            <li>Precio: <strong class="accent">$89.000</strong></li>
+            <li>Envío rápido.</li>
+            <li>Resultados desde la primera semana</li>
+            <li>Recibe de obsequio <strong>2 sobres</strong> de citrato de magnesio</li>
+          </ul>
+          <div class="timer" style="margin:16px 0">
+            <div class="box"><div class="muted">Horas</div><div id="t-h" style="font-size:1.6rem">00</div></div>
+            <div class="box"><div class="muted">Min</div><div id="t-m" style="font-size:1.6rem">00</div></div>
+            <div class="box"><div class="muted">Seg</div><div id="t-s" style="font-size:1.6rem">00</div></div>
+          </div>
+          <div class="cta-row"><a href="#checkout" class="btn">Ordenar ahora</a><a href="#resenas" class="btn outline">Ver reseñas</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== MODAL DE OFERTAS ===== -->
+  <div class="modal-overlay" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal">
+      <header>
+        <div>
+          <h3 id="modalTitle">Elije tu Oferta</h3>
+          <div class="muted" id="modalSubtitle">Recuerda que pagas al recibir</div>
+        </div>
+        <button class="close" id="closeCheckout" aria-label="Cerrar">×</button>
+      </header>
+      <div class="body">
+        <!-- Selector de ofertas -->
+        <div class="offers" id="offerList">
+          <!-- Opción 1 -->
+          <div class="offer-card" data-offer="Compra 1" data-qty="1" data-price="89000" data-compare="150000" tabindex="0">
+            <div class="offer-img"><img src="melenadeleon.webp" alt="Zipper Strong"></div>
+            <div>
+              <div class="offer-title">Compra 1</div>
+              <div class="muted">1 Melena de león (100 tabletas)</div>
+              <span class="offer-badge badge-hot"></span>
+            </div>
+            <div class="price">
+              <span class="current">$89.000</span>
+            </div>
+          </div>
+          <!-- Opción 2 -->
+          <div class="offer-card" data-offer="Compra 2" data-qty="2" data-price="150000" data-compare="178000" tabindex="0">
+            <div class="offer-img"><img src="melenadeleon.webp" alt="Zipper Strong + Virilex"></div>
+            <div>
+              <div class="offer-title">Compra 2</div>
+              <div class="muted">1 Melena de león segundo con 30% de descuento</div>
+              <span class="offer-badge badge-hot">Más vendido</span>
+            </div>
+            <div class="price">
+              <span class="compare">$178.000</span>
+              <span class="current">$150.000</span>
+            </div>
+          </div>
+          <!-- Opción 3 -->
+          <div class="offer-card" data-offer="Compra 3" data-qty="3" data-price="213000" data-compare="267000" tabindex="0">
+            <div class="offer-img"><img src="melenadeleon.webp" alt="Zipper Strong 2+1"></div>
+            <div>
+              <div class="offer-title">Compra 2 Melena de león tercero 60% de descuento</div>
+              <div class="muted">Tratamiento extendido</div>
+              <span class="offer-badge badge-save">Más ahorro</span>
+            </div>
+            <div class="price">
+              <span class="compare">$267.000</span>
+              <span class="current">$213.000</span>
+            </div>
+          </div>
+        </div>
+     <!--   <div class="totals" id="totalsBox" aria-live="polite">
+          <div class="row"><span>Total</span><strong id="totalPrice">$0</strong></div>
+          <div class="row"><span>Envío</span><strong class="accent">Gratis</strong></div>
+        </div>
+        -->
+
+        <!-- Formulario dentro del modal -->
+        <form id="orderForm" class="glass" novalidate>
+          <!-- Honeypot -->
+          <input type="text" name="website" id="hp" style="position:absolute;left:-9999px;top:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div>
+            <label>Nombre y Apellidos
+              <input required name="name" type="text" placeholder="Tu nombre completo" class="in" maxlength="80">
+            </label>
+            <label>N Documento
+              <input required name="dni" type="number" inputmode="numeric" placeholder="1xx xxx xxxx" class="in" minlength="7" maxlength="13">
+            </label>
+          </div>
+
+          <div>
+            <label>Email
+              <input required name="mail" type="email" placeholder="tuemail@gmail.com" class="in" maxlength="80">
+            </label>
+            <label>WhatsApp
+              <input required name="phone" type="tel" inputmode="numeric" placeholder="3xx xxx xxxx" class="in" minlength="12" maxlength="13">
+            </label>
+          </div>
+
+          <div>
+            <label>Departamento
+              <select required name="state" class="in">
+                <option value="" selected disabled>Selecciona</option>
+                <option>Amazonas</option><option>Antioquia</option><option>Arauca</option><option>Atlántico</option>
+                <option>Bolívar</option><option>Boyacá</option><option>Caldas</option><option>Caquetá</option><option>Casanare</option><option>Cauca</option><option>Cesar</option>
+                <option>Chocó</option><option>Córdoba</option><option>Cundinamarca</option><option>Guainía</option><option>Guaviare</option><option>Huila</option><option>La Guajira</option>
+                <option>Magdalena</option><option>Meta</option><option>Nariño</option><option>Norte de Santander</option><option>Putumayo</option><option>Quindío</option><option>Risaralda</option>
+                <option>San Andrés y Providencia</option><option>Santander</option><option>Sucre</option><option>Tolima</option><option>Valle del Cauca</option><option>Vaupés</option><option>Vichada</option>
+              </select>
+            </label>
+            <label>Ciudad / Municipio
+              <input required name="city" type="text" placeholder="Ej. Bogotá, Medellín" class="in" maxlength="60">
+            </label>
+          </div>
+
+          <label>Dirección de entrega
+            <input required name="address" type="text" placeholder="Calle 00 # 00-00, apto, barrio" class="in" maxlength="120">
+          </label>
+
+          <div>
+            <label>Cantidad
+              <select name="qty" class="in">
+                <option>1 frasco</option>
+                <option>2 frascos</option>
+                <option>3 frascos</option>
+              </select>
+            </label>
+          </div>
+
+          <label style="display:flex;gap:10px;align-items:flex-start">
+            <input type="checkbox" required name="terms" style="accent-color:var(--red)">
+            <span class="muted">Acepto la política de tratamiento de datos y autorizo el contacto para coordinar el envío.</span>
+          </label>
+
+                  <!-- Totales -->
+        <div class="totals" id="totalsBox" aria-live="polite">
+          <div class="row"><span>Total</span><strong id="totalPrice">$0</strong></div>
+          <div class="row"><span>Envío</span><strong class="accent">Gratis</strong></div>
+        </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="submit" id="submitBtn" class="btn">
+              <span class="btn-text">Confirmar pedido</span>
+            </button>
+          </div>
+
+          <div id="formMsg" class="muted" role="status" aria-live="polite" style="margin-top:8px"></div>
+        </form>
+
+        <div id="formMount"></div>
+      </div>
+      <div class="footer">
+        <small class="muted">Protegemos tus datos. Usamos la información únicamente para gestionar tu pedido.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    // Scroll progress
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll',()=>{
+      const h = document.documentElement, s = h.scrollTop, d = h.scrollHeight - h.clientHeight;
+      progress.style.width = (s/d*100)+'%';
+    });
+
+    // Intersection animations
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.animate(
+            [{opacity:0, transform:'translateY(12px)'}, {opacity:1, transform:'translateY(0)'}],
+            {duration:450, easing:'cubic-bezier(.2,.7,.2,1)', fill:'forwards'}
+          );
+          io.unobserve(e.target);
+        }
+      })
+    },{threshold:.12});
+    document.querySelectorAll('.animate,.benefit,.review').forEach(el=>io.observe(el));
+
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    const panes = {
+      core: document.getElementById('pane-core'),
+      amino: document.getElementById('pane-amino'),
+      vit: document.getElementById('pane-vit')
+    };
+    tabs.forEach(t=>t.addEventListener('click',()=>{
+      tabs.forEach(tb=>tb.classList.remove('active'));
+      document.querySelectorAll('.tabpanes > div').forEach(p=>p.classList.remove('active'));
+      t.classList.add('active');
+      panes[t.dataset.pane].classList.add('active');
+    }));
+
+    // ===== Contador 3h persistente por sesión =====
+    const LS_KEY = 'zipper_countdown_end';
+    const threeHours = 3*60*60*1000;
+    let end = parseInt(localStorage.getItem(LS_KEY),10);
+    if (!end || end < Date.now()) { end = Date.now() + threeHours; localStorage.setItem(LS_KEY, String(end)); }
+    const th = document.getElementById('t-h'), tm = document.getElementById('t-m'), ts = document.getElementById('t-s');
+    setInterval(()=>{
+      const left = Math.max(0, end - Date.now());
+      const h = String(Math.floor(left/3.6e6)).padStart(2,'0');
+      const m = String(Math.floor(left%3.6e6/6e4)).padStart(2,'0');
+      const s = String(Math.floor(left%6e4/1e3)).padStart(2,'0');
+      th.textContent=h; tm.textContent=m; ts.textContent=s;
+    },500);
+
+    // ====== FORM LOGIC (Sheets) ====== (SE MANTIENE INTACTO)
+// ====== FORM LOGIC (Sheets) ======
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwU-bfP5xQqyLyGRZKH75w-dyjblWSHppiHMfGCXZ4W1HXEyAw4mfHbGFNCeewiW9bsqg/exec";
+
+document.getElementById("orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const form = e.target;
+  const msg = document.getElementById("formMsg");
+  const btn = document.getElementById("submitBtn");
+
+  // Anti-spam honeypot
+  if (form.website && form.website.value !== "") return;
+
+  // Validaciones
+  const name = form.name.value.trim();
+  const dni = form.dni.value.trim();
+  const mail = form.mail.value.trim();
+  const phone = form.phone.value.trim();
+  const state = form.state.value.trim();
+  const city = form.city.value.trim();
+  const address = form.address.value.trim();
+  const qty = form.qty.value.trim();
+
+  // Verificar campos vacíos
+  if (!name || !dni || !mail || !phone || !state || !city || !address || !qty) {
+    msg.textContent = "⚠️ Por favor completa todos los campos obligatorios.";
+    return;
+  }
+
+  // Validar email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(mail)) {
+    msg.textContent = "⚠️ Ingresa un correo electrónico válido.";
+    return;
+  }
+
+  // Validar teléfono (solo números)
+  const cleanPhone = phone.replace(/\D/g, "");
+  if (cleanPhone.length < 7) {
+    msg.textContent = "⚠️ Ingresa un número de teléfono válido.";
+    return;
+  }
+
+  // Crear data para enviar
+  const data = new URLSearchParams();
+  data.append("name", name);
+  data.append("dni", dni);
+  data.append("mail", mail);
+  data.append("phone", cleanPhone);
+  data.append("state", state);
+  data.append("city", city);
+  data.append("address", address);
+  data.append("qty", qty);
+
+  // Enviar
+  btn.disabled = true;
+  msg.textContent = "Enviando pedido...";
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: data
+  })
+  .then(() => {
+    msg.textContent = "✅ Pedido enviado correctamente. Pronto te contactaremos.";
+    form.reset();
+  })
+  .catch(() => {
+    msg.textContent = "❌ Hubo un error, inténtalo nuevamente.";
+  })
+  .finally(() => {
+    btn.disabled = false;
+  });
+});
+
+
+    // ===== Lógica del modal y selector de ofertas =====
+    const modal = document.getElementById('checkoutModal');
+    const form = document.getElementById('orderForm');
+    const formMount = document.getElementById('formMount');
+    const closeBtn = document.getElementById('closeCheckout');
+
+    // Ocultar "Cantidad" y referenciar el select
+    const qtySelect = form.querySelector('select[name="qty"]');
+    const qtyLabel = qtySelect ? qtySelect.closest('label') : null;
+    if (qtyLabel) qtyLabel.style.display = 'none'; // oculto sin tocar CSS global
+
+    function openModal(){
+      // Añadir campos ocultos de oferta si no existen
+      if (!form.querySelector('input[name="offer"]')) {
+        const hiddenOffer = document.createElement('input');
+        hiddenOffer.type = 'hidden'; hiddenOffer.name = 'offer'; hiddenOffer.id = 'offer';
+        form.appendChild(hiddenOffer);
+      }
+      if (!form.querySelector('input[name="offer_price"]')) {
+        const hiddenPrice = document.createElement('input');
+        hiddenPrice.type = 'hidden'; hiddenPrice.name = 'offer_price'; hiddenPrice.id = 'offer_price';
+        form.appendChild(hiddenPrice);
+      }
+      // Colocar el form en el mount dentro del modal (no se duplica)
+      if (formMount && form && form.parentElement !== formMount) {
+        formMount.appendChild(form);
+      }
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+    // Abrir modal desde CTAs existentes (sin modificar su HTML)
+    document.querySelectorAll('a[href="#checkout"], a[href="#oferta"].btn, .cta-row .btn').forEach(el=>{
+      const text = el.textContent.trim().toLowerCase();
+      if(text.includes('ordenar ahora') || text.includes('quiero recuperar') || text.includes('comenzar ahora')) {
+        el.addEventListener('click', (ev)=>{ ev.preventDefault(); openModal(); });
+      }
+    });
+
+    // Selector de ofertas
+    const offerCards = Array.from(document.querySelectorAll('.offer-card'));
+    const totalPrice = document.getElementById('totalPrice');
+    function formatCOP(n){
+      return n.toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0});
+    }
+
+    function selectOffer(card){
+      offerCards.forEach(c=>c.classList.remove('active'));
+      card.classList.add('active');
+
+      const price = Number(card.dataset.price);
+      totalPrice.textContent = formatCOP(price);
+
+      // Rellenar inputs ocultos (si existen)
+      const offerInput = document.getElementById('offer');
+      const offerPriceInput = document.getElementById('offer_price');
+      if (offerInput) offerInput.value = card.dataset.offer;
+      if (offerPriceInput) offerPriceInput.value = String(price);
+
+      // Autocompletar "Cantidad" según oferta (aunque esté oculta)
+      if (qtySelect) {
+        const q = parseInt(card.dataset.qty, 10) || 1;
+        const val = q === 1 ? '1 frasco' : `${q} frascos`;
+        qtySelect.value = val;
+      }
+    }
+
+    offerCards.forEach(c=>{
+      c.addEventListener('click', ()=> selectOffer(c));
+      c.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); selectOffer(c); } });
+    });
+
+    // Selección por defecto
+    selectOffer(offerCards[1] || offerCards[0]);
+  </script>
+</body>
+</html>
