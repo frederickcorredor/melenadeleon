@@ -20,7 +20,7 @@
     body{margin:0;background:linear-gradient(180deg,#0b0b0b,#121212 60%,#0b0b0b);color:#eaeaea;font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif;padding: 12px;}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    .wrap{max-width:1180px;margin:16px auto;padding:0 20px}
+    .wrap{max-width:1180px;margin:16px auto;padding:0 12px}
 
     /* Global effects */
     .glass{background:linear-gradient(180deg,#ffffff0f,#ffffff05);backdrop-filter:blur(8px);border:1px solid #ffffff1a;box-shadow:0 10px 30px #0008;border-radius:16px}
@@ -33,6 +33,8 @@
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:6px 10px;border:1px solid #ffffff2a;border-radius:999px;background:#ffffff0f;font-size:.85rem}
     .kpi{display:grid;gap:8px;padding:6px 12px;border-radius:14px;background:#0f0f0f;border:1px solid #ffffff14;flex: 1;align-content: center;}
     .kpi strong{font-size:1.4rem}
+    ul{margin-left: -20px;}
+    li{margin-bottom: 16px;}
 
     /* Loading state for button */
     .btn.loading{opacity:.85;pointer-events:none}
@@ -54,6 +56,7 @@
     .product-media{position:relative;display: flex;justify-content: center;}
     .product-media .bottle{width:60%}
     .price{font-size:1.2rem}
+    .bottle{-webkit-animation: heartbeat 1.5s ease-in-out infinite both;animation: heartbeat 6s ease-in-out infinite both;}
 
     /* Sections */
     section{padding:70px 0}
@@ -107,7 +110,7 @@
 
     /* Responsive */
     @media (max-width: 980px){
-      header{background-image: url(fondo1.webp);background-size: 280px;background-repeat: no-repeat;background-position: 220px 40px;}
+      header{background-image: url(melenadeleon.webp);background-size: 280px;background-repeat: no-repeat;background-position: 220px 40px;}
       .hero .grid{grid-template-columns:1fr;gap:22px;padding-top:0px; padding-bottom: 0px;}
       .grid-3,.reviews{grid-template-columns:1fr}
       .offer{grid-template-columns:1fr}
@@ -158,7 +161,7 @@
     .row strong{font-weight:800}
     @media (max-width:980px){
       .offer-card{grid-template-columns:53px 1fr auto}
-      .offer-img{width:50px;height:50px}
+      .offer-img{width:50px;height:auto}
     }
 
   @-webkit-keyframes heartbeat {
@@ -223,10 +226,10 @@
     <!-- Beneficios principales -->
     <section id="beneficios" class="wrap">
       <div class="grid-2-1" id="benefitsGrid">
-        <article class="benefit animate" style="background-image: url(imagenbanner.webp);color: #ffffff;background-position: center;background-blend-mode: soft-light;"><h3 class="accent">Mejora tu concentración y memoria</h3><p>Estimula las funciones cognitivas, ayudándote a pensar más rápido y mantener la mente clara todo el día.</p></article>
-        <article class="benefit animate" style="background-image: url(control.webp);color: #ffffff;background-position: top right;background-blend-mode: soft-light;"><h3 class="accent">Aumenta tu energía sin cafeína</h3><p> Las vitaminas B1, B2 y B6 aportan vitalidad y equilibrio al sistema nervioso, sin causar nerviosismo ni insomnio.</p></article>
-        <article class="benefit animate" style="background-image: url(resistencia.webp);color: #ffffff;background-position: center;background-blend-mode: soft-light;"><h3 class="accent">Reduce el estrés y mejora el ánimo</h3><p>Favorece la estabilidad emocional y la relajación mental de forma natural.</p></article>
-        <article class="benefit animate" style="background-image: url(volumen.webp);color: #ffffff;background-position: center;background-blend-mode: soft-light;"><h3 class="accent">Protege tu cerebro a largo plazo</h3><p>Apoya la regeneración neuronal y el bienestar cognitivo con una fórmula respaldada por la ciencia.</p></article>
+        <article class="benefit animate" style="background-image: url(fon1.webp);color: #ffffff;background-position: center;"><h3 class="accent">Mejora tu concentración y memoria</h3><p>Estimula las funciones cognitivas, ayudándote a pensar más rápido y mantener la mente clara todo el día.</p></article>
+        <article class="benefit animate" style="background-image: url(fon2.webp);color: #ffffff;background-position: top right;"><h3 class="accent">Aumenta tu energía sin cafeína</h3><p> Las vitaminas B1, B2 y B6 aportan vitalidad y equilibrio al sistema nervioso, sin causar nerviosismo ni insomnio.</p></article>
+        <article class="benefit animate" style="background-image: url(fon3.webp);color: #ffffff;background-position: center;"><h3 class="accent">Reduce el estrés y mejora el ánimo</h3><p>Favorece la estabilidad emocional y la relajación mental de forma natural.</p></article>
+        <article class="benefit animate" style="background-image: url(fon4.webp);color: #ffffff;background-position: center;"><h3 class="accent">Protege tu cerebro a largo plazo</h3><p>Apoya la regeneración neuronal y el bienestar cognitivo con una fórmula respaldada por la ciencia.</p></article>
       </div>
     </section>
 
@@ -235,12 +238,9 @@
     <!-- Comparativa/visual blocks -->
     <section class="wrap">
       <div class="grid-2-1">
+        
         <div class="glass" style="padding:18px">
-          <h3 class="accent" style="text-align: center;">Producto con registro INVIMA</h3>
-          <img loading="lazy" src="invima.webp" alt="invima" style="border-radius: 16px;"/>
-        </div>
-        <div class="glass" style="padding:18px">
-          <h3 class="accent">Elije Melena de León Naturalsplast y no las imitaciones</h3>
+          <h3 class="accent" style="text-align: center;color: white;line-height: 28px;font-size: 24px;">Elije Melena de León <br> <span style="font-size: 32px;color: var(--gold);">Naturalsplast</span> <br> NO LAS IMITACIONES</h3>
           <ul>
             <li>🚫 Evita riesgos: hay productos baratos de $60.000 que no cuentan con registro sanitario ni garantía sobre su contenido</li>
             <li>⚠️ Cuidado con los suplementos sin respaldo: pueden afectar tu salud y no ofrecen resultados reales.</li>
@@ -248,6 +248,11 @@
             Melena de León Naturalsplast S.A.S. cuenta con registro INVIMA, fabricación certificada y fórmulas con ingredientes seguros y de calidad.</li>
           </ul>
           <h4>Cada tableta está elaborada bajo estrictos estándares de laboratorio, garantizando pureza y efectividad.</h4>
+        </div>
+
+        <div class="glass" style="padding:18px">
+          <h3 class="accent" style="text-align: center;">Producto con registro INVIMA</h3>
+          <img loading="lazy" src="invima.webp" alt="invima" style="border-radius: 16px;"/>
         </div>
       </div>
     </section>
@@ -356,11 +361,11 @@
 
     <!-- Oferta con contador -->
     <section id="oferta" class="wrap">
-      <div class="offer glass" style="padding:20px">
-        <div class="glass" style="padding:16px">
+      <div class="offer glass" style="padding:20px;">
+        <div class="glass" style="padding:16px;background: linear-gradient(146deg, #000000c7, #ffffff05);">
           <div class="preform">
             <h2 class="sec-title" style="color: rgb(255, 255, 255);padding: 16px;text-shadow: 1px 1px 1px #ffb300;">Pide ahora <br><span class="accent">Recibe Obsequio</span></h2>
-            <img src="promo.webp" alt="">
+            <img src="promomele.webp" alt="">
           </div>
           
         </div>
@@ -404,7 +409,7 @@
             <div>
               <div class="offer-title">Compra 1</div>
               <div class="muted">1 Melena de león (100 tabletas)</div>
-              <span class="offer-badge badge-hot"></span>
+              <span class="offer-badge badge-hot">Oferta</span>
             </div>
             <div class="price">
               <span class="current">$89.000</span>
