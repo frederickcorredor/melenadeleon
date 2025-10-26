@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -59,8 +58,7 @@
     .bottle{-webkit-animation: heartbeat 1.5s ease-in-out infinite both;animation: heartbeat 6s ease-in-out infinite both;}
 
     /* Sections */
-    section{padding:70px 0}
-    .sec-title{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:0 0 12px;text-wrap: pretty;}
+    .sec-title{font-size:clamp(1.2rem,2.6vw,2.2rem);margin:0 0 12px;text-wrap: pretty;}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
     .grid-2 p{max-width: 250px;font-weight: 700;text-wrap: pretty;font-size: 14px;}
@@ -110,7 +108,7 @@
 
     /* Responsive */
     @media (max-width: 980px){
-      header{background-image: url(melenadeleon.webp);background-size: 280px;background-repeat: no-repeat;background-position: 220px 40px;}
+      header{background-image: url(melenadeleon.webp);background-size: 280px;background-repeat: no-repeat;background-position: 210px 40px;}
       .hero .grid{grid-template-columns:1fr;gap:22px;padding-top:0px; padding-bottom: 0px;}
       .grid-3,.reviews{grid-template-columns:1fr}
       .offer{grid-template-columns:1fr}
@@ -119,7 +117,7 @@
       #orderForm div{display:grid;grid-template-columns:1fr;gap:12px}
       .stickybar .row{flex-direction: column;}
       .kpi{text-align: left;}
-      .preform{background-position: -330px; display: block;}
+      .preform{display: block;}
       .subtitle{ background-color: #000000cc;padding: 12px;border-radius: 16px;text-wrap: pretty;}
       nav{position: absolute; opacity: 0;}
       .wrappercausas{grid-template-columns: 1fr;}
@@ -164,6 +162,76 @@
       .offer-img{width:50px;height:auto}
     }
 
+     /* --- Estilos del carrusel --- */
+    .testimonios {
+      overflow: hidden;
+    }
+
+    .testimonios h2 {
+      text-align: center;
+      
+    }
+
+    .carrusel {
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .carrusel-track {
+      display: flex;
+      width: max-content;
+      animation: scroll-left 30s linear infinite;
+    }
+
+    .carrusel-track.reverse {
+      animation: scroll-right 10s linear infinite;
+    }
+
+    .carrusel img {
+      border-radius: 10px;
+      margin: 0 10px;
+      object-fit: cover;
+    }
+
+    /* Animaciones */
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Ajustes por tipo */
+    .carrusel-whatsapp img {
+      width: 180px;
+      height: 400px;
+    }
+
+    .carrusel-facebook img {
+      width: 400px;
+      height: 120px;
+    }
+
+    @media (max-width: 768px) {
+      .carrusel-whatsapp img {
+        width: 170px;
+        height: 350px;
+        border:2px solid #ccc;
+        margin: 6px;
+      }
+      .carrusel-facebook img {
+        width: 300px;
+        height: 75px;
+        border:2px solid #ccc;
+        margin: 6px;
+      }
+    }
+
   @-webkit-keyframes heartbeat {
     from {transform: scale(1);transform-origin:center;animation-timing-function:ease-out}
     10% {transform: scale(0.91);animation-timing-function:ease-in}
@@ -188,7 +256,7 @@
       <div>
         <div class="badge">Regenerador y Oxigenante Cerebral</div>
         <h1 class="title"><span class="accent">Recupera tu enfoque y claridad mental </span><br> <span style="font-size: 20px;margin-top: 18px;">Melena de León <br> Naturalsplast</span></h1>
-        <p class="subtitle">Más energia y concentración desde <strong style="color: var(--gold);"> el primer mes.</strong></p>
+        <p class="subtitle">Más energia y concentración desde <br> <strong style="color: var(--gold);"> La primera semana.</strong></p>
         <div class="trust">
           <div class="kpi"><strong class="">Concentración</strong><span class="muted">No mas mente dispersa</span></div>
           <div class="kpi"><strong class="">Memoria</strong><span class="muted">Recupera tu memoria</span></div>
@@ -233,7 +301,44 @@
       </div>
     </section>
 
-   
+   <!-- SECCIÓN DE TESTIMONIOS -->
+    <section class="testimonios" id="testimonios">
+      <h2>Testimonios Reales</h2>
+
+      <!-- Carrusel de WhatsApp -->
+      <div class="carrusel carrusel-whatsapp">
+        <div class="carrusel-track reverse">
+          <img src="testwasa3.webp" alt="Testimonio WhatsApp 3">
+          <img src="testwasa2.webp" alt="Testimonio WhatsApp 2">
+          <img src="testwasa1.webp" alt="Testimonio WhatsApp 3">
+          <img src="testwasa4.webp" alt="Testimonio WhatsApp 4">
+          <img src="testwasa5.webp" alt="Testimonio WhatsApp 5">
+          <!-- Duplicados para efecto infinito -->
+          <img src="testwasa3.webp" alt="Testimonio WhatsApp 3">
+          <img src="testwasa2.webp" alt="Testimonio WhatsApp 2">
+          <img src="testwasa1.webp" alt="Testimonio WhatsApp 3">
+          <img src="testwasa4.webp" alt="Testimonio WhatsApp 4">
+          <img src="testwasa5.webp" alt="Testimonio WhatsApp 5">
+        </div>
+      </div>
+
+      <!-- Carrusel de Facebook -->
+      <div class="carrusel carrusel-facebook">
+        <div class="carrusel-track">
+          <img src="testface1.webp" alt="Testimonio Facebook 1">
+          <img src="testface2.webp" alt="Testimonio Facebook 2">
+          <img src="testface3.webp" alt="Testimonio Facebook 3">
+          <img src="testface4.webp" alt="Testimonio Facebook 4">
+          <!-- Duplicados para efecto infinito -->
+          <img src="testface1.webp" alt="Testimonio Facebook 1">
+          <img src="testface2.webp" alt="Testimonio Facebook 2">
+          <img src="testface3.webp" alt="Testimonio Facebook 3">
+          <img src="testface4.webp" alt="Testimonio Facebook 4">
+        </div>
+      </div>
+
+      
+    </section>
 
     <!-- Comparativa/visual blocks -->
     <section class="wrap">
@@ -242,7 +347,7 @@
         <div class="glass" style="padding:18px">
           <h3 class="accent" style="text-align: center;color: white;line-height: 28px;font-size: 24px;">Elije Melena de León <br> <span style="font-size: 32px;color: var(--gold);">Naturalsplast</span> <br> NO LAS IMITACIONES</h3>
           <ul>
-            <li>🚫 Evita riesgos: hay productos baratos de $60.000 que no cuentan con registro sanitario ni garantía sobre su contenido</li>
+            <li>🚫 Evita riesgos: hay productos baratos que no cuentan con registro sanitario ni garantía sobre su contenido</li>
             <li>⚠️ Cuidado con los suplementos sin respaldo: pueden afectar tu salud y no ofrecen resultados reales.</li>
             <li>✅ Confía en la marca líder:
             Melena de León Naturalsplast S.A.S. cuenta con registro INVIMA, fabricación certificada y fórmulas con ingredientes seguros y de calidad.</li>
@@ -252,7 +357,7 @@
 
         <div class="glass" style="padding:18px">
           <h3 class="accent" style="text-align: center;">Producto con registro INVIMA</h3>
-          <img loading="lazy" src="invima.webp" alt="invima" style="border-radius: 16px;"/>
+          <img loading="lazy" src="REGISTROINVIMA.webp" alt="invima" style="border-radius: 16px;"/>
         </div>
       </div>
     </section>
@@ -289,15 +394,7 @@
     
       </section>
 
-    <!-- Reseñas -->
-    <section id="resenas" class="wrap">
-      <h2 class="sec-title">Personas que confían en Melena de León Naturalsplast</h2>
-      <div class="reviews" id="reviews">
-        <article class="review animate"><div class="stars">★★★★★</div><p>“Después del primer mes, dejé las bebidas energizantes. Confianza total y energía todo el día.”</p><div class="muted">Carlos, Bogotá</div></article>
-        <article class="review animate"><div class="stars">★★★★★</div><p>“Desde que lo uso, mi concentración mejoró muchísimo en el trabajo. Me siento con más energía y menos estrés.”</p><div class="muted">Laura, Medellín</div></article>
-        <article class="review animate"><div class="stars">★★★★★</div><p>“Probé otros productos más baratos y no me sirvieron. Este sí tiene resultados y me da confianza porque tiene INVIMA”</p><div class="muted">Juan, Bucaramanga</div></article>
-      </div>
-    </section>
+
 
 
 
@@ -329,9 +426,9 @@
 
         <div id="pane-vit" class="grid-3">
           
-          <div class="kpi"><span class="muted">Vit. B1</span><strong>0.3 mg</strong><span class="muted">Energía</span></div>
-          <div class="kpi"><span class="muted">Vit. B2</span><strong>0.3 mg</strong><span class="muted">Metabolismo</span></div>
-          <div class="kpi"><span class="muted">Vit. B6</span><strong>0.1 mg</strong><span class="muted">Sistema nervioso</span></div>
+          <div class="kpi"><span class="muted">Vit. B1</span><strong>0.30 mg</strong><span class="muted">Energía</span></div>
+          <div class="kpi"><span class="muted">Vit. B2</span><strong>0.30 mg</strong><span class="muted">Metabolismo</span></div>
+          <div class="kpi"><span class="muted">Vit. B6</span><strong>0.30 mg</strong><span class="muted">Sistema nervioso</span></div>
           <div class="kpi"><span class="muted">Tocoferol</span><strong>15 UI</strong><span class="muted">Antioxidante</span></div>
         </div>
       </div>
@@ -364,8 +461,8 @@
       <div class="offer glass" style="padding:20px;">
         <div class="glass" style="padding:16px;background: linear-gradient(146deg, #000000c7, #ffffff05);">
           <div class="preform">
-            <h2 class="sec-title" style="color: rgb(255, 255, 255);padding: 16px;text-shadow: 1px 1px 1px #ffb300;">Pide ahora <br><span class="accent">Recibe Obsequio</span></h2>
-            <img src="promomele.webp" alt="">
+           
+            <img src="Obsequio.webp" alt="">
           </div>
           
         </div>
@@ -429,7 +526,7 @@
             </div>
           </div>
           <!-- Opción 3 -->
-          <div class="offer-card" data-offer="Compra 3" data-qty="3" data-price="213000" data-compare="267000" tabindex="0">
+          <div class="offer-card" data-offer="Compra 3" data-qty="3" data-price="213000" data-compare="267000" tabindex="0" style="display: none;">
             <div class="offer-img"><img src="melenadeleon.webp" alt="Zipper Strong 2+1"></div>
             <div>
               <div class="offer-title">Compra 2 Melena de león tercero 60% de descuento</div>
@@ -738,7 +835,7 @@ document.getElementById("orderForm").addEventListener("submit", e => {
     });
 
     // Selección por defecto
-    selectOffer(offerCards[1] || offerCards[0]);
+    selectOffer(offerCards[0] || offerCards[0]);
   </script>
 </body>
 </html>
